@@ -45,7 +45,6 @@ class Board:
         return False
     def autoplay(self):
         #Two automatic players against each other
-        #TODO: Modify player2 (not player1) to use MCTS instead of Randplay
         if not self.game_over:
             player1 = Randplay(self.grid, self.piece)
             r,c = player1.make_move()
@@ -53,8 +52,7 @@ class Board:
             self.set_piece(r, c)
             self.check_win(r, c)
         if not self.game_over:
-            #TODO: Modify player2 to use MCTS instead of Randplay
-            player2 = Randplay(self.grid, self.piece)
+            player2 = MCTS(self.grid, self.piece)
             r,c = player2.make_move()
             print("Auto", self.piece, "move: (", r, ",", c, ")")
             self.set_piece(r, c)
@@ -62,8 +60,7 @@ class Board:
     #Human vs computer
     def semi_autoplay(self):
         if not self.game_over:
-        #Optional: Change this to MCTS AI and see whether you can win
-            player1 = Randplay(self.grid, self.piece)
+            player1 = MCTS(self.grid, self.piece)
             r,c = player1.make_move()
             print("Semi-Auto", self.piece, "move: (", r, ",", c, ")")
             self.set_piece(r, c)
